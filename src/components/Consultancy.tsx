@@ -33,7 +33,7 @@ const Consultancy = () => {
   ];
 
   return (
-    <section className="py-20 bg-white relative overflow-hidden">
+    <section id="consultancy" className="py-20 bg-white relative overflow-hidden">
       {/* Grid Background Effect */}
       <div 
         className="absolute inset-0 opacity-60"

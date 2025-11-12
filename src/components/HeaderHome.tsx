@@ -54,32 +54,36 @@ const HeaderHome = () => {
             About us
           </a>
           <a
-            onClick={() => navigate("/services")}
-            className={`cursor-pointer text-lg transition-colors duration-300 ${isScrolled ? "text-black hover:text-primary" : "text-white hover:text-primary"
-              }`}
+            onClick={() => handleNavClick("products")}
+            className={`cursor-pointer text-lg transition-colors duration-300 ${
+              isScrolled ? "text-black hover:text-primary" : "text-white hover:text-primary"
+            }`}
+          >
+            Products
+          </a>
+          <a
+            onClick={() => handleNavClick("services")}
+            className={`cursor-pointer text-lg transition-colors duration-300 ${
+              isScrolled ? "text-black hover:text-primary" : "text-white hover:text-primary"
+            }`}
           >
             Services
           </a>
-
-
-          <a onClick={() => navigate("/people")} className={`cursor-pointer text-lg transition-colors duration-300 ${isScrolled ? "text-black hover:text-primary" : "text-white hover:text-primary"}`}>
-            People
-          </a>
           <a
-            onClick={() => navigate("/news")}
+            onClick={() => handleNavClick("consultancy")}
             className={`cursor-pointer text-lg transition-colors duration-300 ${
               isScrolled ? "text-black hover:text-primary" : "text-white hover:text-primary"
             }`}
           >
-            In the Spotlight
+            Consultancy
           </a>
           <a
-            onClick={() => navigate("/blogs")}
+            onClick={() => handleNavClick("trainings")}
             className={`cursor-pointer text-lg transition-colors duration-300 ${
               isScrolled ? "text-black hover:text-primary" : "text-white hover:text-primary"
             }`}
           >
-            Blog
+            Trainings
           </a>
         </nav>
 
@@ -87,7 +91,7 @@ const HeaderHome = () => {
           <Button
             variant="default"
             className="hidden sm:flex bg-[#84D14A] hover:bg-[#84D14A] text-white font-medium px-6 rounded-full"
-            onClick={() => navigate("/contact")} // Replaced window.location.href
+            onClick={() => handleNavClick("contact")} // Changed to scroll
           >
             Contact us
           </Button>
@@ -115,45 +119,33 @@ const HeaderHome = () => {
               About us
             </a>
             <a
-              onClick={() =>{setIsMobileMenuOpen(false); navigate("services");}}
+              onClick={() => handleNavClick("products")}
+              className="block py-2 text-foreground hover:text-primary transition-colors cursor-pointer"
+            >
+              Products
+            </a>
+            <a
+              onClick={() => handleNavClick("services")}
               className="block py-2 text-foreground hover:text-primary transition-colors cursor-pointer"
             >
               Services
             </a>
             <a
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                navigate("/people");
-              }}
+              onClick={() => handleNavClick("consultancy")}
               className="block py-2 text-foreground hover:text-primary transition-colors cursor-pointer"
             >
-              People
+              Consultancy
             </a>
             <a
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                navigate("/news");
-              }}
+              onClick={() => handleNavClick("trainings")}
               className="block py-2 text-foreground hover:text-primary transition-colors cursor-pointer"
             >
-              In the Spotlight
-            </a>
-            <a
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                navigate("/blogs");
-              }}
-              className="block py-2 text-foreground hover:text-primary transition-colors cursor-pointer"
-            >
-              Blogs
+            Trainings
             </a>
             <Button
               variant="default"
               className="w-full bg-primary hover:bg-primary/90 text-white font-medium rounded-full mt-4"
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                navigate("/contact"); // Replaced window.location.href
-              }}
+              onClick={() => handleNavClick("contact")} // Changed to scroll
             >
               Contact us
             </Button>

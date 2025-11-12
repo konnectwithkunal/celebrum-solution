@@ -46,7 +46,7 @@ const TrainingPrograms = () => {
   ];
 
   return (
-    <section className="py-20 bg-[#0a1f1a] relative overflow-hidden">
+    <section id="trainings" className="py-20 bg-[#0a1f1a] relative overflow-hidden">
       {/* Grid Background Effect */}
       <div 
         className="absolute inset-0 opacity-20"
