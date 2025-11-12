@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  :root {
+    /* Toaster Dark Theme */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 84% 60%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 15%;
+    --ring: 0 84% 60%;
+    --radius: 0.5rem;
+    
+    /* Grid overlay */
+    --grid-color: 0 0% 20%;
+    
+    /* Brand Colors */
+    --brand-red: 0 84% 60%;
+    --brand-red-light: 0 84% 75%;
+    --brand-red-dark: 0 84% 45%;
+    
+    /* Sidebar */
+    --sidebar-background: 0 0% 8%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 0 0% 98%;
+    --sidebar-primary-foreground: 0 0% 9%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 0 84% 60%;
+  }
+}
+
+@layer components {
+  /* Grid overlay pattern */
+  .grid-overlay {
+    background-image: 
+      linear-gradient(hsl(var(--grid-color)) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--grid-color)) 1px, transparent 1px);
+    background-size: 115px 115px;
+  }
+  .grid-mob {
+    background-image: 
+      linear-gradient(hsl(var(--grid-color)) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--grid-color)) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+    /* Lighter grid overlay for about section */
+  .grid-overlay-light {
+    background-image: 
+      linear-gradient(#CCCCCC 1.15px, transparent 1.15px),
+      linear-gradient(90deg, #CCCCCC 1.15px, transparent 1.15px);
+    background-size: 115px 115px;
+  }
+  .grid-mob-light {
+    background-image: 
+      linear-gradient(#CCCCCC 1.15px, transparent 1.15px),
+      linear-gradient(90deg, #CCCCCC 1.15px, transparent 1.15px);
+    background-size: 50px 50px;
+  }
+  
+  /* Outlined text effect */
+  .text-outlined {
+    -webkit-text-stroke: 2px hsl(var(--foreground));
+    -webkit-text-fill-color: transparent;
+    text-stroke: 2px hsl(var(--foreground));
+    text-fill-color: transparent;
+  }
+  
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Interactive elements */
+  .hover-glow {
+    transition: all 0.3s ease;
+  }
+  
+  .hover-glow:hover {
+    box-shadow: 0 0 30px hsl(var(--primary)/0.3);
+    transform: translateY(-2px);
+  }
+  
+  /* Stagger animation for children */
+  .stagger-children > * {
+    animation-delay: calc(var(--stagger-delay, 0) * 0.1s);
+  }
+  
+  /* Intersection observer animation classes */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.arrow {
+  width: 7em;
+  height: 4em;
+  margin-left: 320px;
+  animation: left-right 2s infinite;
+  display: block;
+  color: black;
+}
+
+@keyframes left-right {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(10px); }
+}
+
+@media (max-width: 1200px) {
+ 
+  .section-text h1 {
+    font-size: 3.2rem;
+  }
+  .section-description {
+    margin-left: 0;
+    max-width: 100%;
+    font-size: 1rem;
+  }
+  .arrow {
+    margin-left: -20px;
+    margin-bottom: 40px;
+    width: 6em;
+    height: 3em;
+  }
+}
+
+@media (max-width: 750px) {
+
+  .section-text h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  .section-description {
+    margin-top: -100px;
+    margin-left: 60px;
+    margin-bottom: 20px;
+    max-width: 80%;
+    font-size: 0.97rem;
+    gap: 14px;
+  }
+  .arrow {
+    display: block;
+    width: 4em;
+    height: 3em;
+  }
+  .why-choose-us {
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+}
