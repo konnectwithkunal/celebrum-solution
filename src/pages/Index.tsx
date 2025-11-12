@@ -8,7 +8,7 @@ import Services from "@/components/Services";
 
 
 import Footer from "@/components/Footer";
-import Products from "@/components/products";
+import Products from "@/components/Products";
 import Servicecomp from "@/components/Servicecomp"
 import Ncs from "@/components/Ncs"
 import Consultancy from "@/components/Consultancy";
