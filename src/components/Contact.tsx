@@ -105,17 +105,17 @@ const Contact = () => {
     {
       icon: "location_on",
       title: "Our Location",
-      detail: "123 Future Finance Avenue, Tech City, 12345"
+      detail: "306, H149, Block H, Sector 63, Noida, Uttar Pradesh 201309"
     },
     {
       icon: "email",
       title: "Email Us",
-      detail: "konnectwithkunal@gmail.com"
+      detail: "cerebrumsolutions5@gmail.com"
     },
     {
       icon: "call",
       title: "Call Us",
-      detail: "+1 (555) 123-4567"
+      detail: "+91 9810407825"
     },
     {
       icon: "schedule",

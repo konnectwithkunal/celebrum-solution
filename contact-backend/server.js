@@ -62,7 +62,7 @@ app.post("/send", async (req, res) => {
   const mailOptions = {
     from: process.env.MAIL_USER,
     replyTo: email || process.env.MAIL_USER,
-    to: "konnectwithkunal@gmail.com",
+    to: "cerebrumsolutions5@gmail.com",
     subject: `Contact Form: ${subject}`,
     html: `
       <h2>New Contact Form Submission</h2>

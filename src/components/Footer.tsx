@@ -106,21 +106,21 @@ const Footer = () => {
             >
               <h3 className="text-xl font-bold mb-4">Contact Info</h3>
               <ul className="space-y-3 text-sm text-gray-300">
-                <li>123 Future Ave, Metropolis, 90210</li>
+                <li>306, H149, Block H, Sector 63,<br/>Noida, Uttar Pradesh 201309</li>
                 <li>
                   <a
-                    href="mailto:contact@financialsolutions.com"
+                    href="mailto:cerebrumsolutions5@gmail.com"
                     className="hover:text-[#10b981] transition-colors duration-300"
                   >
-                    contact@financialsolutions.com
+                    cerebrumsolutions5@gmail.com
                   </a>
                 </li>
                 <li>
                   <a
-                    href="tel:+15551234567"
+                    href="tel:+919810407825"
                     className="hover:text-[#10b981] transition-colors duration-300"
                   >
-                    +1 (555) 123-4567
+                    +91 9810407825
                   </a>
                 </li>
               </ul>
