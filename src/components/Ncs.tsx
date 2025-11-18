@@ -6,6 +6,13 @@ const TrainingPrograms = () => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
+  const scrollToContact = () => {
+    const element = document.getElementById('contact');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const programs = [
     {
       id: "ignite",
@@ -162,6 +169,7 @@ const TrainingPrograms = () => {
 
               {/* CTA Button */}
               <motion.button
+                onClick={scrollToContact}
                 className="bg-[#65C765] hover:bg-[#55b755] text-[#0a1f1a] font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#65C765]/50"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
