@@ -144,17 +144,18 @@ function Hero({ setNavbarTransparent }) {
             transition={{ duration: 0.8, delay: 0.9 }}
           >
             {[
-              { label: 'Products', desc: 'Bespoke Solutions' },
-              { label: 'Services', desc: 'Expert Guidance' },
-              { label: 'Training', desc: 'Skill Development' }
+              { label: 'Products', desc: 'Bespoke Solutions', link: 'products' },
+              { label: 'Services', desc: 'Expert Guidance', link: 'services' },
+              { label: 'Training', desc: 'Skill Development', link: 'trainings' }
             ].map((item, index) => (
-              <div
+              <button
                 key={index}
-                className="p-6 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300"
+                onClick={() => scrollToSection(item.link)}
+                className="p-6 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 cursor-pointer hover:scale-105 hover:border-[#84D14A]/50 group text-left"
               >
-                <h3 className="text-2xl font-bold text-white mb-2">{item.label}</h3>
+                <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-[#84D14A] transition-colors duration-300">{item.label}</h3>
                 <p className="text-gray-400 text-sm">{item.desc}</p>
-              </div>
+              </button>
             ))}
           </motion.div>
         </div>
