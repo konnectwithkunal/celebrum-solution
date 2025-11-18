@@ -1,7 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { motion, useInView } from "framer-motion";
 
 const ServicesDetailed = () => {
   const [selectedService, setSelectedService] = useState(0);
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   const services = [
     {
@@ -50,9 +53,9 @@ const ServicesDetailed = () => {
   ];
 
   return (
-    <section className="py-20 bg-[#0a1f1a] relative overflow-hidden">
+    <section ref={ref} className="py-20 bg-[#0a1f1a] relative overflow-hidden">
       {/* Grid Background Effect */}
-      <div 
+      <div
         className="absolute inset-0 opacity-20"
         style={{
           backgroundImage: `
@@ -64,15 +67,25 @@ const ServicesDetailed = () => {
       />
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="mb-12">
+        <motion.div
+          className="mb-12"
+          initial={{ opacity: 0, x: -30 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-[#65C765] mb-8">SERVICES</h2>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Left Sidebar - Service Tabs */}
-          <div className="lg:col-span-3 space-y-2">
+          <motion.div
+            className="lg:col-span-3 space-y-2"
+            initial={{ opacity: 0, x: -40 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             {services.map((service, index) => (
-              <button
+              <motion.button
                 key={service.id}
                 onClick={() => setSelectedService(index)}
                 className={`w-full text-left px-6 py-4 rounded-lg transition-all duration-300 flex items-center gap-3 ${
@@ -80,8 +93,11 @@ const ServicesDetailed = () => {
                     ? 'bg-[#1a3d2e] border-l-4 border-[#65C765]'
                     : 'bg-transparent hover:bg-[#0f2820]'
                 }`}
+                initial={{ opacity: 0, x: -20 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
               >
-                <span 
+                <span
                   className={`material-symbols-outlined text-2xl transition-colors duration-300 ${
                     selectedService === index
                       ? 'text-[#65C765]'
@@ -93,7 +109,7 @@ const ServicesDetailed = () => {
                 >
                   {service.icon}
                 </span>
-                <span 
+                <span
                   className={`text-sm font-semibold uppercase tracking-wider transition-colors duration-300 ${
                     selectedService === index
                       ? 'text-[#65C765]'
@@ -102,34 +118,48 @@ const ServicesDetailed = () => {
                 >
                   {service.title}
                 </span>
-              </button>
+              </motion.button>
             ))}
-          </div>
+          </motion.div>
 
           {/* Right Content Area */}
-          <div className="lg:col-span-9">
-            <div className="bg-[#0f2820] rounded-lg p-8 border border-[#1a3d2e]">
+          <motion.div
+            className="lg:col-span-9"
+            initial={{ opacity: 0, x: 40 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <motion.div
+              key={selectedService}
+              className="bg-[#0f2820] rounded-lg p-8 border border-[#1a3d2e]"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+            >
               <h3 className="text-2xl font-bold text-[#65C765] mb-4 uppercase">
                 {services[selectedService].title}
               </h3>
-              
+
               <p className="text-white text-lg mb-6 leading-relaxed">
                 {services[selectedService].description}
               </p>
 
               <ul className="space-y-3">
                 {services[selectedService].points.map((point, index) => (
-                  <li 
+                  <motion.li
                     key={index}
                     className="text-gray-300 flex items-start gap-3"
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
                   >
                     <span className="text-[#65C765] mt-1 flex-shrink-0">•</span>
                     <span>{point}</span>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
 
