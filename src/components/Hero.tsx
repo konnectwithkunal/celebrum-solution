@@ -47,7 +47,7 @@ function Hero({ setNavbarTransparent }) {
 
         {/* Animated gradient orbs */}
         <motion.div
-          className="absolute top-1/4 -left-20 w-96 h-96 bg-[#F05656] rounded-full opacity-20 blur-3xl"
+          className="absolute top-1/4 -left-20 w-96 h-96 bg-[#84D14A] rounded-full opacity-20 blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.2, 0.3, 0.2],
@@ -59,7 +59,7 @@ function Hero({ setNavbarTransparent }) {
           }}
         />
         <motion.div
-          className="absolute bottom-1/4 -right-20 w-96 h-96 bg-[#F05656] rounded-full opacity-20 blur-3xl"
+          className="absolute bottom-1/4 -right-20 w-96 h-96 bg-[#84D14A] rounded-full opacity-20 blur-3xl"
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.3, 0.2, 0.3],
@@ -83,7 +83,7 @@ function Hero({ setNavbarTransparent }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Sparkles className="w-4 h-4 text-[#F05656]" />
+            <Sparkles className="w-4 h-4 text-[#84D14A]" />
             <span className="text-sm text-gray-300">Innovative Financial Solutions</span>
           </motion.div>
 
@@ -96,7 +96,7 @@ function Hero({ setNavbarTransparent }) {
           >
             Empowering Financial
             <br />
-            <span className="bg-gradient-to-r from-[#F05656] via-[#FF6B6B] to-[#F05656] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#84D14A] via-[#A3E56B] to-[#84D14A] bg-clip-text text-transparent">
               Institutions
             </span>
             {" "}with Innovation
@@ -122,7 +122,7 @@ function Hero({ setNavbarTransparent }) {
           >
             <button
               onClick={() => scrollToSection('about')}
-              className="group px-8 py-4 bg-[#F05656] text-white rounded-lg font-semibold hover:bg-[#E04545] transition-all duration-300 flex items-center gap-2 shadow-lg shadow-[#F05656]/30 hover:shadow-[#F05656]/50 hover:scale-105"
+              className="group px-8 py-4 bg-[#84D14A] text-black rounded-lg font-semibold hover:bg-[#73C038] transition-all duration-300 flex items-center gap-2 shadow-lg shadow-[#84D14A]/30 hover:shadow-[#84D14A]/50 hover:scale-105"
             >
               Explore Our Solutions
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -172,7 +172,7 @@ function Hero({ setNavbarTransparent }) {
       >
         <div className="w-6 h-10 rounded-full border-2 border-white/30 flex items-start justify-center p-2">
           <motion.div
-            className="w-1.5 h-1.5 bg-[#F05656] rounded-full"
+            className="w-1.5 h-1.5 bg-[#84D14A] rounded-full"
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           />
