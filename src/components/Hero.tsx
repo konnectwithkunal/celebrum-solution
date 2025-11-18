@@ -138,7 +138,7 @@ function Hero({ setNavbarTransparent }) {
 
           {/* Stats or features */}
           <motion.div
-            className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
+            className="mt-20 mb-16 md:mb-0 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
