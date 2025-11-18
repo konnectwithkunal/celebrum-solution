@@ -12,7 +12,7 @@ const HeaderHome = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -38,7 +38,7 @@ const HeaderHome = () => {
         isScrolled ? "bg-black/30 backdrop-blur-lg border-b border-white/10 shadow-lg" : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="container mx-auto px-6 py-3 md:py-4 flex items-center justify-between">
         <motion.div
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -47,8 +47,8 @@ const HeaderHome = () => {
           <Link to="/">
             <img
               src={isScrolled ? "/img/neo.png" : "/img/neo.png"}
-              alt="NewsMakerIndia Logo"
-              className="h-14 w-auto transition-all duration-300"
+              alt="Cerebrum Solution Logo"
+              className="h-12 md:h-14 w-auto transition-all duration-300"
             />
           </Link>
         </motion.div>
@@ -120,7 +120,7 @@ const HeaderHome = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="md:hidden bg-black/40 backdrop-blur-lg border-t border-white/10"
+            className="md:hidden bg-black/30 backdrop-blur-lg border-t border-white/10"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}

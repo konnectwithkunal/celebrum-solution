@@ -37,7 +37,7 @@ function Hero({ setNavbarTransparent }) {
   return (
     <div
       ref={heroRef}
-      className="relative w-full min-h-[110vh] md:min-h-screen overflow-hidden bg-black pt-20"
+      className="relative w-full min-h-[110vh] md:min-h-screen overflow-hidden bg-black pt-10 md:pt-20"
       style={{ margin: 0 }}
     >
       {/* Animated gradient background */}
