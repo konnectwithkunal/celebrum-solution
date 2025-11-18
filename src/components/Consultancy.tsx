@@ -1,4 +1,10 @@
+import React from 'react';
+import { motion, useInView } from 'framer-motion';
+
 const Consultancy = () => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
+
   const services = [
     {
       icon: "psychology",
@@ -33,9 +39,9 @@ const Consultancy = () => {
   ];
 
   return (
-    <section id="consultancy" className="py-20 bg-white relative overflow-hidden">
+    <section id="consultancy" ref={ref} className="py-20 bg-white relative overflow-hidden">
       {/* Grid Background Effect */}
-      <div 
+      <div
         className="absolute inset-0 opacity-60"
         style={{
           backgroundImage: `
@@ -48,26 +54,44 @@ const Consultancy = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Heading */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          <motion.h2
+            className="text-4xl md:text-5xl font-bold text-black mb-4"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             CONSULTANCY
-          </h2>
-          <p className="text-gray-700 text-lg max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p
+            className="text-gray-700 text-lg max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
             Expert guidance for strategic financial decision-making
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={index}
               className="group bg-white border-2 border-gray-200 rounded-xl p-8 hover:border-[#65C765] hover:shadow-xl transition-all duration-300"
+              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
             >
               {/* Icon */}
               <div className="flex justify-center mb-6">
                 <div className="w-16 h-16 flex items-center justify-center">
-                  <span 
+                  <span
                     className="material-symbols-outlined text-[#65C765] text-5xl transition-transform duration-300 group-hover:scale-110"
                     style={{
                       fontVariationSettings: "'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48"
@@ -87,7 +111,7 @@ const Consultancy = () => {
               <p className="text-gray-700 text-sm text-center leading-relaxed">
                 {service.description}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

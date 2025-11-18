@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const HeaderHome = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,22 +30,36 @@ const HeaderHome = () => {
   };
 
   return (
-    <header
+    <motion.header
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? "bg-white shadow-lg border-b border-gray-200" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-        <Link to="/">
-          <img
-            src={isScrolled ? "/img/neo.png" : "/img/neo.png"}
-            alt="NewsMakerIndia Logo"
-            className="h-14 w-auto transition-all duration-300"
-          />
-        </Link>
+        <motion.div
+          initial={{ x: -20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <Link to="/">
+            <img
+              src={isScrolled ? "/img/neo.png" : "/img/neo.png"}
+              alt="NewsMakerIndia Logo"
+              className="h-14 w-auto transition-all duration-300"
+            />
+          </Link>
+        </motion.div>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center space-x-8">
+        <motion.nav
+          className="hidden md:flex items-center space-x-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
           <a
             onClick={() => handleNavClick("about")}
             className={`cursor-pointer text-lg transition-colors duration-300 ${
@@ -85,9 +100,14 @@ const HeaderHome = () => {
           >
             Trainings
           </a>
-        </nav>
+        </motion.nav>
 
-        <div className="flex items-center gap-4">
+        <motion.div
+          className="flex items-center gap-4"
+          initial={{ x: 20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
           <Button
             variant="default"
             className="hidden sm:flex bg-[#84D14A] hover:bg-[#84D14A] text-white font-medium px-6 rounded-full"
@@ -105,12 +125,19 @@ const HeaderHome = () => {
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
-        </div>
+        </motion.div>
       </div>
 
       {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-background border-t border-border">
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            className="md:hidden bg-background border-t border-border"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
           <nav className="container mx-auto px-6 py-4 space-y-4">
             <a
               onClick={() => handleNavClick("about")}
@@ -150,9 +177,10 @@ const HeaderHome = () => {
               Contact us
             </Button>
           </nav>
-        </div>
-      )}
-    </header>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 };
 

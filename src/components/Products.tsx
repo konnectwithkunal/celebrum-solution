@@ -1,7 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { motion, useInView } from "framer-motion";
 
 const Products = () => {
   const [hoveredProduct, setHoveredProduct] = useState(null);
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   const products = [
     {
@@ -27,9 +30,9 @@ const Products = () => {
   ];
 
   return (
-    <section id="products" className="py-20 bg-[#0a1f1a] relative overflow-hidden">
+    <section id="products" ref={ref} className="py-20 bg-[#0a1f1a] relative overflow-hidden">
       {/* Grid Background Effect */}
-      <div 
+      <div
         className="absolute inset-0 opacity-20"
         style={{
           backgroundImage: `
@@ -41,15 +44,25 @@ const Products = () => {
       />
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          <motion.h2
+            className="text-4xl md:text-5xl font-bold text-white mb-4"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             Our Integrated Financial Solutions
-          </h2>
-        </div>
+          </motion.h2>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
           {products.map((product, index) => (
-            <div
+            <motion.div
               key={index}
               className={`group relative rounded-xl p-8 transition-all duration-500 flex flex-col items-center text-center cursor-pointer ${
                 hoveredProduct === index
@@ -58,16 +71,19 @@ const Products = () => {
               }`}
               onMouseEnter={() => setHoveredProduct(index)}
               onMouseLeave={() => setHoveredProduct(null)}
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
             >
               {/* Icon Container */}
-              <div 
+              <div
                 className={`w-20 h-20 rounded-full flex items-center justify-center mb-6 transition-all duration-500 ${
                   hoveredProduct === index
                     ? 'bg-[#65C765] shadow-lg shadow-[#65C765]/50'
                     : 'bg-[#1a3d2e] group-hover:bg-[#2a5040]'
                 }`}
               >
-                <span 
+                <span
                   className={`material-symbols-outlined text-4xl transition-colors duration-300 ${
                     hoveredProduct === index
                       ? 'text-[#0a1f1a]'
@@ -80,9 +96,9 @@ const Products = () => {
                   {product.icon}
                 </span>
               </div>
-              
+
               {/* Title */}
-              <h3 
+              <h3
                 className={`text-base font-bold mb-3 uppercase tracking-wide transition-colors duration-300 ${
                   hoveredProduct === index
                     ? 'text-[#65C765]'
@@ -91,21 +107,21 @@ const Products = () => {
               >
                 {product.title}
               </h3>
-              
+
               {/* Description */}
               <p className="text-gray-400 text-sm leading-relaxed">
                 {product.description}
               </p>
 
               {/* Subtle bottom accent line */}
-              <div 
+              <div
                 className={`absolute bottom-0 left-0 right-0 h-1 rounded-b-xl transition-all duration-500 ${
                   hoveredProduct === index
                     ? 'bg-[#65C765]'
                     : 'bg-transparent'
                 }`}
               />
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

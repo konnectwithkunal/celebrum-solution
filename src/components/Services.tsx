@@ -1,7 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { motion, useInView } from "framer-motion";
 
 const Services = () => {
   const [selectedService, setSelectedService] = useState(0);
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   const services = [
     {
@@ -27,18 +30,35 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="py-20 bg-[#0a1f1a]">
+    <section id="services" ref={ref} className="py-20 bg-[#0a1f1a]">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Services</h2>
-          <p className="text-lg text-gray-400 max-w-3xl mx-auto">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          <motion.h2
+            className="text-4xl md:text-5xl font-bold text-white mb-4"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            Services
+          </motion.h2>
+          <motion.p
+            className="text-lg text-gray-400 max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
             We deliver comprehensive solutions driven by a deep understanding of the fast-changing financial landscape and emerging technologies.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={index}
               className={`group relative rounded-lg p-6 transition-all duration-300 flex flex-col items-start cursor-pointer ${
                 selectedService === index
@@ -46,8 +66,11 @@ const Services = () => {
                   : 'bg-[#0f2820] hover:bg-[#1a3d2e]'
               }`}
               onMouseEnter={() => setSelectedService(index)}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
             >
-              <span 
+              <span
                 className={`material-symbols-outlined text-5xl mb-4 transition-colors duration-300 ${
                   selectedService === index
                     ? 'text-[#65C765]'
@@ -59,8 +82,8 @@ const Services = () => {
               >
                 {service.icon}
               </span>
-              
-              <h3 
+
+              <h3
                 className={`text-xl font-semibold mb-3 transition-colors duration-300 ${
                   selectedService === index
                     ? 'text-[#65C765]'
@@ -69,11 +92,11 @@ const Services = () => {
               >
                 {service.title}
               </h3>
-              
+
               <p className="text-gray-400 text-sm leading-relaxed flex-grow">
                 {service.description}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
