@@ -109,10 +109,10 @@ const Footer = () => {
                 <li>306, H149, Block H, Sector 63,<br/>Noida, Uttar Pradesh 201309</li>
                 <li>
                   <a
-                    href="mailto:cerebrumsolutions5@gmail.com"
+                    href="mailto:Info@cerebrumsolutions.in"
                     className="hover:text-[#10b981] transition-colors duration-300"
                   >
-                    cerebrumsolutions5@gmail.com
+                    Info@cerebrumsolutions.in
                   </a>
                 </li>
                 <li>

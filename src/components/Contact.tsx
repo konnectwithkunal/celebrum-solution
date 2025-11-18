@@ -110,7 +110,7 @@ const Contact = () => {
     {
       icon: "email",
       title: "Email Us",
-      detail: "cerebrumsolutions5@gmail.com"
+      detail: "Info@cerebrumsolutions.in"
     },
     {
       icon: "call",
