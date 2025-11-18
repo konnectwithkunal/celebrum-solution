@@ -61,11 +61,13 @@ const Footer = () => {
               animate={isFooterInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="flex items-center gap-2 mb-4">
-                <svg className="w-6 h-6 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
-                <h3 className="text-xl font-bold">Financial Solutions</h3>
+              <div className="mb-4">
+                <img
+                  src="/img/neo.png"
+                  alt="Cerebrum Solution"
+                  className="h-12 w-auto"
+                  style={{ filter: 'brightness(0) invert(1)' }}
+                />
               </div>
               <p className="text-gray-300 text-sm leading-relaxed">
                 Pioneering the future of finance with innovative solutions
