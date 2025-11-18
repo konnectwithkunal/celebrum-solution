@@ -6,6 +6,13 @@ const Services = () => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
+  const scrollToContact = () => {
+    const element = document.getElementById('contact');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const services = [
     {
       title: "Products",
@@ -66,6 +73,7 @@ const Services = () => {
                   : 'bg-[#0f2820] hover:bg-[#1a3d2e]'
               }`}
               onMouseEnter={() => setSelectedService(index)}
+              onClick={scrollToContact}
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}

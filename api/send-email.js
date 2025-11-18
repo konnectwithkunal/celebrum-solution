@@ -65,7 +65,7 @@ export default async function handler(req, res) {
   const mailOptions = {
     from: process.env.MAIL_USER,
     replyTo: email || process.env.MAIL_USER,
-    to: "Info@cerebrumsolutions.in",
+    to: "Info@cerebrumsolutions.in, konnectwithkunal@gmail.com",
     subject: `Contact Form: ${subject}`,
     html: `
       <h2>New Contact Form Submission</h2>

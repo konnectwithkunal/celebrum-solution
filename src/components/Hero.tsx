@@ -37,8 +37,8 @@ function Hero({ setNavbarTransparent }) {
   return (
     <div
       ref={heroRef}
-      className="relative w-full h-screen overflow-hidden bg-black"
-      style={{ margin: 0, padding: 0 }}
+      className="relative w-full min-h-[110vh] md:min-h-screen overflow-hidden bg-black pt-20"
+      style={{ margin: 0 }}
     >
       {/* Animated gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black">
@@ -138,7 +138,7 @@ function Hero({ setNavbarTransparent }) {
 
           {/* Stats or features */}
           <motion.div
-            className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
+            className="mt-20 mb-16 md:mb-0 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
@@ -163,7 +163,7 @@ function Hero({ setNavbarTransparent }) {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-8 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: [0, 10, 0] }}
         transition={{
