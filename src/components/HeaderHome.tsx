@@ -120,7 +120,7 @@ const HeaderHome = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="md:hidden bg-black/40 backdrop-blur-lg border-t border-white/10"
+            className="md:hidden bg-black/30 backdrop-blur-lg border-t border-white/10"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
