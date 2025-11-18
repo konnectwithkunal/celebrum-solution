@@ -136,7 +136,9 @@ const Footer = () => {
               >
                 {/* LinkedIn */}
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/company/neo-cerebrum-solutions/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 bg-transparent border-2 border-white hover:bg-[#10b981] hover:border-[#10b981] rounded flex items-center justify-center transition-all duration-300 group"
                   aria-label="LinkedIn"
                 >
