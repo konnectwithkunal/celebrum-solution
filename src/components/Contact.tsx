@@ -3,10 +3,14 @@ import { motion, useInView } from "framer-motion";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    fullName: "",
+    name: "",
     email: "",
+    phone: "",
+    subject: "",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState({ type: "", message: "" });
 
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
@@ -16,11 +20,85 @@ const Contact = () => {
       ...formData,
       [e.target.name]: e.target.value
     });
+    // Clear error when user starts typing
+    if (submitStatus.type === "error") {
+      setSubmitStatus({ type: "", message: "" });
+    }
   };
 
-  const handleSubmit = () => {
-    console.log("Form submitted:", formData);
-    alert("Message sent successfully!");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Validate required fields
+    if (!formData.name || !formData.subject || !formData.message) {
+      setSubmitStatus({
+        type: "error",
+        message: "Please fill in name, subject, and message fields"
+      });
+      return;
+    }
+
+    // Validate that at least one contact method is provided
+    if (!formData.email && !formData.phone) {
+      setSubmitStatus({
+        type: "error",
+        message: "Please provide either an email address or phone number"
+      });
+      return;
+    }
+
+    // Validate email format if provided
+    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      setSubmitStatus({
+        type: "error",
+        message: "Please enter a valid email address"
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus({ type: "", message: "" });
+
+    try {
+      // Try Vercel serverless function first
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: "success",
+          message: "Thank you! Your message has been sent successfully. We'll get back to you soon."
+        });
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: ""
+        });
+      } else {
+        setSubmitStatus({
+          type: "error",
+          message: data.message || "Failed to send message. Please try again."
+        });
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setSubmitStatus({
+        type: "error",
+        message: "An error occurred. Please try again later or contact us directly."
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -32,7 +110,7 @@ const Contact = () => {
     {
       icon: "email",
       title: "Email Us",
-      detail: "contact@futurefinance.com"
+      detail: "konnectwithkunal@gmail.com"
     },
     {
       icon: "call",
@@ -208,8 +286,23 @@ const Contact = () => {
           >
             <h3 className="text-2xl font-bold text-white mb-6">Send Us a Message</h3>
 
-            <div className="space-y-5">
-              {/* Full Name */}
+            {/* Status Messages */}
+            {submitStatus.message && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`mb-4 p-4 rounded-lg ${
+                  submitStatus.type === "success"
+                    ? "bg-[#65C765]/20 border border-[#65C765] text-[#65C765]"
+                    : "bg-red-500/20 border border-red-500 text-red-400"
+                }`}
+              >
+                {submitStatus.message}
+              </motion.div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-5">
+              {/* Name */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -217,10 +310,11 @@ const Contact = () => {
               >
                 <input
                   type="text"
-                  name="fullName"
-                  value={formData.fullName}
+                  name="name"
+                  value={formData.name}
                   onChange={handleChange}
-                  placeholder="Full Name"
+                  placeholder="Full Name *"
+                  required
                   className="w-full bg-[#152d24] border border-[#1a3d2e] rounded-lg px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#65C765] transition-colors duration-300"
                 />
               </motion.div>
@@ -241,33 +335,71 @@ const Contact = () => {
                 />
               </motion.div>
 
-              {/* Message */}
+              {/* Phone */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.65 }}
+              >
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="Phone Number"
+                  className="w-full bg-[#152d24] border border-[#1a3d2e] rounded-lg px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#65C765] transition-colors duration-300"
+                />
+                <p className="text-xs text-gray-500 mt-1">* Either email or phone is required</p>
+              </motion.div>
+
+              {/* Subject */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.4, delay: 0.7 }}
               >
+                <input
+                  type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  placeholder="Subject *"
+                  required
+                  className="w-full bg-[#152d24] border border-[#1a3d2e] rounded-lg px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#65C765] transition-colors duration-300"
+                />
+              </motion.div>
+
+              {/* Message */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.75 }}
+              >
                 <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Your Message"
+                  placeholder="Your Message *"
                   rows="6"
+                  required
                   className="w-full bg-[#152d24] border border-[#1a3d2e] rounded-lg px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#65C765] transition-colors duration-300 resize-none"
                 />
               </motion.div>
 
               {/* Submit Button */}
               <motion.button
-                onClick={handleSubmit}
-                className="w-full bg-[#65C765] hover:bg-[#55b755] text-[#0a1f1a] font-bold py-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-[#65C765]/50"
+                type="submit"
+                disabled={isSubmitting}
+                className={`w-full bg-[#65C765] hover:bg-[#55b755] text-[#0a1f1a] font-bold py-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-[#65C765]/50 ${
+                  isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+                }`}
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.4, delay: 0.8 }}
               >
-                Send Message
+                {isSubmitting ? "Sending..." : "Send Message"}
               </motion.button>
-            </div>
+            </form>
           </motion.div>
         </div>
       </div>
